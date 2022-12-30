@@ -58,5 +58,17 @@ public class ProductController {
 		}
 	}
 
+	@Autowired
+	ItemProducer itemProducer;
+
+
+	@GetMapping("/item")
+	public void item() {
+		try {
+			itemProducer.sendMessage("item");
+		} catch (Exception e) {
+		}
+	}
+
 
 }
