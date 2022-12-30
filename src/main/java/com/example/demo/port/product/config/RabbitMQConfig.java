@@ -1,4 +1,4 @@
-package com.example.demo.port.product;
+package com.example.demo.port.product.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -11,28 +11,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.queue.name}")
+    @Value("product")
     private String queue;
 
-    @Value("${rabbitmq.exchange.name}")
+    @Value("product_exchange")
     private String exchange;
 
-    @Value("${rabbitmq.routing.key}")
+    @Value("product_routing_key")
     private String routingKey;
 
-    // spring bean for rabbitmq queue
     @Bean
     public Queue queue(){
         return new Queue(queue);
     }
 
-    // spring bean for rabbitmq exchange
     @Bean
     public TopicExchange exchange(){
         return new TopicExchange(exchange);
     }
 
-    // binding between queue and exchange using routing key
     @Bean
     public Binding binding(){
         return BindingBuilder
@@ -41,8 +38,4 @@ public class RabbitMQConfig {
                 .with(routingKey);
     }
 
-// Spring boot autoconfiguration provides following beans
-    // ConnectionFactory
-    // RabbitTemplate
-    // RabbitAdmin
 }

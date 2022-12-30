@@ -8,17 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
 @RestController
 public class ProductController {
 
 	@Autowired
 	private IProductService productService;
-
-	@Autowired
-	private Producer producer;
 
 	@PostMapping(path="/product")
 	@ResponseStatus(HttpStatus.OK)
@@ -42,7 +36,7 @@ public class ProductController {
 		return null;
 	}
 
-	@GetMapping(path="/product")
+	@DeleteMapping(path="/product")
 	public @ResponseBody String delete () {
 		return null;
 	}
@@ -53,12 +47,13 @@ public class ProductController {
 	}
 
 	@Autowired
-	RabbitMQProducer rabbitMQProducer;
+	ProductProducer productProducer;
+
 
 	@GetMapping("/affe")
 	public void affe() {
 		try {
-			rabbitMQProducer.sendMessage("affe");
+			productProducer.sendMessage("product");
 		} catch (Exception e) {
 		}
 	}
