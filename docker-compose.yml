@@ -14,6 +14,17 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: user
       MYSQL_ROOT_PASSWORD: user
+    networks:
+      - internal
+
+  rabbitmq-container:
+    image: rabbitmq:3.11-management
+    hostname: rabbitmq-container
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - internal
 
   app:
     container_name: demo
@@ -22,17 +33,21 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       - db
+      - rabbitmq-container
     volumes:
       - ./:/app/app
     links:
       - db:db
+    networks:
+      - internal
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/demo?useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      - spring_rabbitmq_host=rabbitmq-container
+      - spring_rabbitmq_port=5672
 
-
-
-
-
+networks:
+  internal:
+    name: internal

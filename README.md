@@ -30,3 +30,6 @@ git push -u origin main
 git remote add origin https://github.com/dumketob/cbd.git
 git branch -M main
 git push -u origin main
+
+# docker rabbitmq
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-management

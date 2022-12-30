@@ -3,15 +3,22 @@ package com.example.demo.port.product;
 import com.example.demo.core.domain.model.Product;
 import com.example.demo.core.domain.service.interfaces.IProductService;
 import com.example.demo.port.product.exception.ProductNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 public class ProductController {
 
 	@Autowired
 	private IProductService productService;
+
+	@Autowired
+	private Producer producer;
 
 	@PostMapping(path="/product")
 	@ResponseStatus(HttpStatus.OK)
@@ -44,5 +51,17 @@ public class ProductController {
 	public @ResponseBody Iterable<Product> getProducts() {
 		return productService.getAllProducts();
 	}
+
+	@Autowired
+	RabbitMQProducer rabbitMQProducer;
+
+	@GetMapping("/affe")
+	public void affe() {
+		try {
+			rabbitMQProducer.sendMessage("affe");
+		} catch (Exception e) {
+		}
+	}
+
 
 }
