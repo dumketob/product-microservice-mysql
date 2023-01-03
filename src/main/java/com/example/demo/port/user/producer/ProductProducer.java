@@ -1,4 +1,4 @@
-package com.example.demo.port.product;
+package com.example.demo.port.user.producer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

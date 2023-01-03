@@ -1,4 +1,4 @@
-package com.example.demo.port.product.exception;
+package com.example.demo.port.user.exception;
 
 public class ProductNotFoundException extends RuntimeException {
 

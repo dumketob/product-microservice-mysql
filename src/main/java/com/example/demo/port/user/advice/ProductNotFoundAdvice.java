@@ -1,6 +1,6 @@
-package com.example.demo.port.product.advice;
+package com.example.demo.port.user.advice;
 
-import com.example.demo.port.product.exception.ProductNotFoundException;
+import com.example.demo.port.user.exception.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

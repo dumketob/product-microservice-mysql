@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  db:
+  database:
     platform: linux/x86_64
     image: mysql:8.0
     container_name: mysql
@@ -35,12 +35,12 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - db
+      - database
       - rabbitmq-container
     volumes:
       - ./:/app/app
     links:
-      - db:db
+      - database
     networks:
       - internal
     environment:

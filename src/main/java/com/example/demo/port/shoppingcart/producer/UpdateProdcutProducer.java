@@ -1,4 +1,4 @@
-package com.example.demo.port.product;
+package com.example.demo.port.shoppingcart.producer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ItemProducer {
+public class UpdateProdcutProducer {
 
     @Value("product_exchange")
     private String exchange;
@@ -15,11 +15,11 @@ public class ItemProducer {
     @Value("item_routing_key")
     private String routingKey;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ItemProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UpdateProdcutProducer.class);
 
     private final RabbitTemplate rabbitTemplate;
 
-    public ItemProducer(RabbitTemplate rabbitTemplate) {
+    public UpdateProdcutProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
